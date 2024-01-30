@@ -11,7 +11,6 @@ test.group('Users', (group) => {
   test('ensure we can get logged in user details', async ({ assert, client }) => {
     const user = await UserFactory.create()
     const response = await client.get('/auth/me').loginAs(user)
-    console.log(response)
     response.assertStatus(200)
     assert.equal(response.body().id, user.id)
   })
@@ -28,7 +27,14 @@ test.group('Users', (group) => {
     response.assertStatus(200)
     response.assertBodyContains({ authenticated: false })
   })
+
+  test('ensure we can logout', async ({ assert, client }) => {
+    const user = await UserFactory.create()
+    const response = await client.delete('/auth/logout').loginAs(user)
+    response.assertStatus(204)
+  })
 })
+
 test.group('User | Register', (group) => {
   group.each.setup(async () => {
     await Database.beginGlobalTransaction('pg')
