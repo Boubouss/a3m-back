@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@adonisjs/auth':
     specifier: 8.2.3
-    version: 8.2.3(@adonisjs/application@5.3.0)(@adonisjs/core@5.9.0)(@adonisjs/lucid@18.4.0)
+    version: 8.2.3(@adonisjs/application@5.3.0)(@adonisjs/core@5.9.0)(@adonisjs/lucid@18.4.0)(@adonisjs/session@6.4.0)
   '@adonisjs/core':
     specifier: ^5.8.0
     version: 5.9.0
@@ -17,6 +17,9 @@ dependencies:
   '@adonisjs/repl':
     specifier: ^3.1.0
     version: 3.1.11(@adonisjs/core@5.9.0)
+  '@adonisjs/session':
+    specifier: ^6.4.0
+    version: 6.4.0(@adonisjs/core@5.9.0)
   luxon:
     specifier: ^3.4.4
     version: 3.4.4
@@ -142,7 +145,7 @@ packages:
       - supports-color
     dev: true
 
-  /@adonisjs/auth@8.2.3(@adonisjs/application@5.3.0)(@adonisjs/core@5.9.0)(@adonisjs/lucid@18.4.0):
+  /@adonisjs/auth@8.2.3(@adonisjs/application@5.3.0)(@adonisjs/core@5.9.0)(@adonisjs/lucid@18.4.0)(@adonisjs/session@6.4.0):
     resolution: {integrity: sha512-js9e8AHEsNC/8MGvho6MgL+uXr8SlhTg9MJJDWQBBiqsKkT7+H7NMP/pLbuSzYaaf40t2u/OXfq6wXuIC5ZYvw==}
     peerDependencies:
       '@adonisjs/core': ^5.7.1
@@ -162,6 +165,7 @@ packages:
     dependencies:
       '@adonisjs/core': 5.9.0
       '@adonisjs/lucid': 18.4.0(@adonisjs/application@5.3.0)(@adonisjs/core@5.9.0)(pg@8.11.3)
+      '@adonisjs/session': 6.4.0(@adonisjs/core@5.9.0)
       '@poppinss/hooks': 5.0.3(@adonisjs/application@5.3.0)
       '@poppinss/utils': 5.0.0
       luxon: 3.4.4
@@ -377,6 +381,16 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@adonisjs/session@6.4.0(@adonisjs/core@5.9.0):
+    resolution: {integrity: sha512-9yHS60lFpNBUX5/yB+0j+bXQDWqbaYJ1JelLCYtaKRa7B0NewvmPAmsNpHH8SrXE3XGaRyKOxrUGRcmSGg5mRA==}
+    peerDependencies:
+      '@adonisjs/core': ^5.8.0
+    dependencies:
+      '@adonisjs/core': 5.9.0
+      '@poppinss/utils': 4.0.4
+      fs-extra: 10.1.0
+    dev: false
 
   /@adonisjs/sink@5.4.3(@adonisjs/application@5.3.0):
     resolution: {integrity: sha512-wmAft/tjHQLtjbDjntaVu3/cmeP+3tXKDaMeWjVf6Dz+tXaM9XNg2EVVSV41F3JDF4W1u9ich9mC+4wvWJDy5g==}
