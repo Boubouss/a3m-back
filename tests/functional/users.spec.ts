@@ -27,11 +27,43 @@ test.group('Users', (group) => {
     response.assertStatus(200)
     response.assertBodyContains({ authenticated: false })
   })
+})
 
-  test('ensure we can logout', async ({ assert, client }) => {
+test.group('User | Login / Logout', (group) => {
+  group.each.setup(async () => {
+    await Database.beginGlobalTransaction('pg')
+    return () => Database.rollbackGlobalTransaction('pg')
+  })
+
+  test('ensure we can logout', async ({ client }) => {
     const user = await UserFactory.create()
     const response = await client.delete('/auth/logout').loginAs(user)
     response.assertStatus(204)
+  })
+
+  test('ensure we can login', async ({ client }) => {
+    const user = await UserFactory.create()
+    const response = await client
+      .post('/auth/login')
+      .json({ email: user.email, password: 'secret1234' })
+    response.assertStatus(204)
+  })
+
+  test('ensure we cannot login with invalid password', async ({ client }) => {
+    const user = await UserFactory.create()
+    const response = await client
+      .post('/auth/login')
+      .json({ email: user.email, password: 'invalid' })
+    response.assertStatus(400)
+    response.assertBodyContains({ code: 'E_INVALID_CREDENTIALS' })
+  })
+
+  test('ensure we cannot login with invalid email', async ({ client }) => {
+    const response = await client
+      .post('/auth/login')
+      .json({ email: 'redwanbsm@examlple.com', password: 'secret1234' })
+    response.assertStatus(400)
+    response.assertBodyContains({ code: 'E_INVALID_CREDENTIALS' })
   })
 })
 

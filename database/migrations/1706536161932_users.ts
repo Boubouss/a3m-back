@@ -11,7 +11,6 @@ export default class extends BaseSchema {
       table.string('firstname', 255).nullable()
       table.string('lastname', 255).nullable()
       table.dateTime('birthdate', { useTz: true }).nullable()
-
       table.enum('genre', ['H', 'F'], {
         useNative: true,
         enumName: 'user_genre',
